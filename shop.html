@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset= "utf-8">
+		<meta name="viewpoint" content="width=device-width">
+		<meta name="description" content="Artistic and handcrafted designs">
+		<meta name="author" content="Virginia Saurer">
+		<title>Virginia Ann Designs | Shop</title>
+		<script>
+
+      function AddPriceObject(itemToPrice){
+        var TheCartItemPrice = document.getElementById('cartItemPrice');
+        var TheCartItem = document.getElementById("CartItem"+itemToPrice);
+        var ThePriceDiv = document.createElement('div');
+        var ThePrice = document.createTextNode("$" + TheCartItem.getAttribute("data-price"));
+        ThePriceDiv.id = 'PriceItem'+itemToPrice;
+        ThePriceDiv.appendChild(ThePrice);
+        TheCartItemPrice.appendChild(ThePriceDiv);
+      }
+      function AddQuantityObject(item){
+        var TheCartItemQuantity = document.getElementById('cartItemQuantity');
+        //var TheQuantityDiv = document.getElementById("CartItem"+itemToPrice);
+        var TheQuantityDiv = document.createElement('div');
+        var TheQuantity = document.createTextNode("l");
+        TheQuantityDiv.id = 'QuantityItem'+item;
+        TheQuantityDiv.appendChild(TheQuantity);
+        TheCartItemQuantity.appendChild(TheQuantityDiv);
+
+      }
+      function AddTotalObject(itemToRemove){
+
+      }
+
+      function RemoveCartItem(item){
+      //  var ItemId = 'CartItem'+item;
+        //var RemoveId = 'RemoveItem'+item;
+        var obj = document.getElementById('CartItem'+item);
+        obj.parentNode.removeChild(obj);
+        obj = document.getElementById('RemoveItem'+item);
+        obj.parentNode.removeChild(obj);
+        obj = document.getElementById('PriceItem'+item);
+        obj.parentNode.removeChild(obj);
+
+      }
+
+      function AddRemoveObject(itemToRemove){
+        var TheCartItemRemove = document.getElementById('cartItemRemove');
+        var TheRemoveDiv = document.createElement("div");
+        var TheRemoveImage = document.createElement("img");
+        TheRemoveDiv.id = 'RemoveItem'+itemToRemove;
+        TheRemoveImage.src = "img/remove.png";
+        TheRemoveImage.height = 25;
+        TheRemoveImage.onclick = function() {RemoveCartItem(itemToRemove);};
+
+        //TheRemoveImage.onclick = RemoveCartItem(itemToRemove);
+        TheRemoveDiv.appendChild(TheRemoveImage);
+        TheCartItemRemove.appendChild(TheRemoveDiv);
+        //TheRemoveImage.onclick = function() RemoveCartItem(itemToRemove););
+        //TheRemoveImage.onclick = RemoveCartItem(itemToRemove);
+
+      }
+    function ShowCartItems(){
+      var TheCartItems = document.getElementById('cartItemImages');
+      var TheCartItemRemove = document.getElementById('cartItemRemove');
+      var TheCartItemPrice = document.getElementById('cartItemPrice');
+      var TheCartItemQuantity = document.getElementById('cartItemQuantity');
+      var TheRemoveNodeList = TheCartItemRemove.getElementsByTagName('div');
+      var TheImageNodeList = TheCartItems.getElementsByTagName('div');
+      var ThePriceNodeList = TheCartItemPrice.getElementsByTagName('div');
+      var TheQuantityNodeList = TheCartItemQuantity.getElementsByTagName('div');
+      for(i=0; i<TheImageNodeList.length;i++){
+        TheImageNodeList[i].style.position = 'absolute';
+        TheImageNodeList[i].style.top = (120 * i) + "px";
+        TheImageNodeList[i].style.left = (0) + "px";
+        TheRemoveNodeList[i].style.position = 'absolute';
+        TheRemoveNodeList[i].style.top = (120 * i) +50+ "px";
+        TheRemoveNodeList[i].style.left = (0) + "px";
+        ThePriceNodeList[i].style.position = 'absolute';
+        ThePriceNodeList[i].style.top = (120 * i) +50+ "px";
+        ThePriceNodeList[i].style.left = (0) + "px";
+        TheQuantityNodeList[i].style.position = 'absolute';
+        TheQuantityNodeList[i].style.top = (120 * i) +50+ "px";
+        TheQuantityNodeList[i].style.left = (0) + "px";
+      }
+    }
+    function FindIfIdExists(obj,id){
+      var TheNodeList = obj.getElementsByTagName('div');
+      for(NodeNumber = 0; NodeNumber<TheNodeList.length;NodeNumber++){
+        if(TheNodeList[NodeNumber].id === id){
+          return NodeNumber + 1;
+        }
+      }
+      return 0;
+    }
+      function ContinueShopping(){
+        document.getElementById('products').style.visibility='visible';
+        document.getElementById('TheCart').style.visibility='hidden';
+
+      }
+      function AddToCart(itemToAdd){
+        var TheCartItemImages = document.getElementById('cartItemImages');
+        var FoundNodeCount = FindIfIdExists(TheCartItemImages, "CartItem"+itemToAdd);
+        if(FoundNodeCount === 0){
+          var TheCartItemToAdd = document.getElementById(itemToAdd).cloneNode(true);
+          TheCartItemToAdd.id = 'CartItem'+itemToAdd;
+          TheCartItemToAdd.childNodes[1].height=100;
+          TheCartItemImages.appendChild(TheCartItemToAdd);
+          AddRemoveObject(itemToAdd);
+          AddPriceObject(itemToAdd);
+          AddQuantityObject(itemToAdd);
+          AddTotalObject(itemToAdd);
+        }
+        ShowCartItems();
+        document.getElementById('products').style.visibility='hidden';
+        document.getElementById('TheCart').style.visibility='visible';
+      }
+    </script>
+		<link rel="stylesheet" href="./css/style.css">
+	</head>
+	<body>
+		
+		<header>
+			<div class="container">
+				<div id="branding">
+				<h1>Virginia Ann Designs</h1>
+			</div>
+			<nav>
+				<ul>
+				<li><a href="index.html">Home</a></li>
+				<li ><a href="about.html">About</a></li>
+				<li class="current"><a href="shop.html">Shop</a></li>
+			</nav>
+		</header>
+		
+	
+		<section id="newsletter">
+			<div class="container">
+				<h1>Subscribe To Our Newsletter</h1>
+				<form>
+					<input type="email" placeholder="Enter Email...">
+					<button type="submit" class="button_1"><Subscribe</button> 
+				</form>
+			</div>
+		</section>
+
+		<section id="main">
+			<div class = "container">
+				<article id="main-col">
+					<h1 class="page-title">Shop</h1>
+					<ul id="services">
+						<li>
+							<h3>Stationary Sets</h3>
+							<p>My artworks printed on card sets</p>
+							<p>Pricing:$10-$20</p>
+						</li>
+						<li>
+							<h3>Accessories</h3>
+							<p>Arworks displayed on scarves, bags and more.</p>
+							<p>Pricing:$10-$50</p>
+						</li><div id ="products" style='visibility: visible'>
+
+      <div id="001" data-price="5.00" style = "position:absolute; left:180px; top: 559px">
+        <img src="img/paris.png" height="135">
+      </div>
+      <div style="position:absolute; left:365px; top: 570px">
+        <img src="img/shoppingCart.png" height="43" onclick='AddToCart("001")'>
+      </div>
+	  <div style="position:absolute; align:right; font-size:11pt; left:185px; top:707px">
+       Hand painted Paris Note Card
+      </div>
+      <div style="position:absolute; align:right; font-size:12pt; left:365px; top:675px">
+       $4.99
+      </div>
+
+      <div id="002" data-price="5.00" style = "position:absolute; left:600px; top: 500px">
+        <img src="img/vogue.JPG" height="200">
+      </div>
+      <div style="position:absolute; left:760px; top: 570px">
+        <img src="img/shoppingCart.png" height="43" onclick='AddToCart("002")'>
+      </div>
+      <div style="position:absolute; align:right; font-size:11pt; left:585px; top:707px">
+       Hand painted Vogue Note Card
+      </div>
+	  <div style="position:absolute; align:right; font-size:12pt; left:765px; top:675px">
+       $4.99
+      </div>
+
+    </div>
+    <div id ="TheCart" style='visibility:hidden'>
+      <div style = "position:absolute; align:right; font-size:40pt; left:70px; top:530px">
+      The Cart
+    </div>
+    <div style = "position:absolute; left:475px; top:650px">
+      <img src="img/continueShopping.png" height="43" onclick='ContinueShopping()'>
+
+    </div>
+
+    <div id ="cartItemImages" style="position:absolute; left: 75px; top:620px"></div>
+    <div id ="cartItemRemove" style="position:absolute; left: 210px; top:620px"></div>
+    <div id ="cartItemPrice" style="position:absolute; left: 250px; top:620px"></div>
+    <div id ="cartItemQuantity" style="position:absolute; left: 400px; top:620px"></div>
+    <div id ="cartItemTotal" style="position:absolute; left: 350px; top:620px"></div>
+    <div id ="cartTotal" style="position:absolute; left: 350px; top:615px">Order Total</div>
+
+
+
+  </div>
+    <div id ="ThankYouForYourOrder" style='visibility:hidden; font-size: 80pt'>
+      Thank You For Your Order
+    </div>
+						
+					</ul>
+				</article>
+				
+				<aside id="sidebar">
+					
+				</aside>
+			</div>	
+		</section>
+		<footer>
+			<p>Virginia Ann Designs, Copyright &copy; 2018</p>
+		</footer>
+		
+	</body>
+</html>
+	
+     
